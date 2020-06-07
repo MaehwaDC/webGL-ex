@@ -1,5 +1,12 @@
 import { startApp } from './core';
+import Car from './game/Car';
 
 startApp({
-  width: 250, height: 250,
+  sceneOptions: {
+    gameObjects: [Car],
+  },
+  gameOptions: {
+    width: 500,
+    height: 500,
+  },
 });

@@ -1,24 +1,33 @@
-import * as PIXI from 'pixi.js';
 import _ from 'lodash';
-import { PIXIOptions } from './entities/types';
+import { PIXIOptions } from './types';
+import sayHello from './utils/sayHello';
+import GameExecutor from './entities/GameExecutor';
+import { SceneOptions } from './entities/Scene';
 
-export default (options: PIXIOptions, appSelector = 'body'): PIXI.Application | never => {
+type Options = {
+  appSelector?: string,
+  sceneOptions: SceneOptions,
+  gameOptions: PIXIOptions,
+  fps?: number
+}
+
+export default (options: Options): void | never => {
+  const {
+    appSelector = 'body', gameOptions = {}, sceneOptions, fps,
+  } = options;
   const node = document.querySelector(appSelector);
 
+  sayHello();
   if (_.isNil(node)) {
     throw new Error('selector not be found');
   }
 
-  const app = new PIXI.Application(options);
+  const gameEx = new GameExecutor({
+    sceneOptions,
+    gameOptions,
+    node,
+    fps,
+  });
 
-  let type = 'WebGL';
-  if (!PIXI.utils.isWebGLSupported()) {
-    type = 'canvas';
-  }
-
-  PIXI.utils.sayHello(type);
-
-  node.appendChild(app.view);
-
-  return app;
+  gameEx.start();
 };

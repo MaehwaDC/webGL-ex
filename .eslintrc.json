@@ -32,6 +32,9 @@
     "import/extensions": ["error", "ignorePackages", {
       "js": "never",
       "ts": "never"
-    }]
+    }],
+    "no-useless-constructor": "off",
+    "class-methods-use-this": "off",
+    "@typescript-eslint/no-empty-function": "off"
   }
 }
