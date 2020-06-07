@@ -2,7 +2,7 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const PORT = 8000;
-const PATH_TO_OUTPUT = path.resolve(__dirname, 'build')
+const PATH_TO_OUTPUT = path.resolve(__dirname, 'build');
 
 module.exports = {
   mode: 'development',
@@ -12,10 +12,13 @@ module.exports = {
     filename: 'main.js',
     path: PATH_TO_OUTPUT,
   },
+  resolve: {
+    extensions: ['.ts', '.js'],
+  },
   devServer: {
     contentBase: PATH_TO_OUTPUT,
     compress: true,
-    port: PORT
+    port: PORT,
   },
   module: {
     rules: [
@@ -23,14 +26,14 @@ module.exports = {
         test: /.(ts|js)$/,
         exclude: /node_modules/,
         use: [
-          'ts-loader',
           {
             loader: 'babel-loader',
             options: {
-              presets: ['@babel/preset-env'],
-              plugins: ['lodash']
-            }
-          }
+              presets: ['@babel/preset-env', '@babel/preset-typescript'],
+              plugins: ['lodash'],
+            },
+          },
+          'ts-loader',
         ],
       },
       {
@@ -43,7 +46,7 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: path.resolve(__dirname, 'static/index.html')
+      template: path.resolve(__dirname, 'static/index.html'),
     }),
-  ]
+  ],
 };
