@@ -18,3 +18,5 @@ export interface PIXIOptions {
   sharedLoader?: boolean;
   resizeTo?: Window | HTMLElement;
 }
+
+export type SomeObject = { [key: string]: any }

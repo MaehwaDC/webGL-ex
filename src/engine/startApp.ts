@@ -1,7 +1,7 @@
 import _ from 'lodash';
 import { PIXIOptions } from './types';
 import sayHello from './utils/sayHello';
-import GameExecutor from './entities/GameExecutor';
+import GameExecutor from './modules/Executor/GameExecutor';
 import { SceneOptions } from './entities/Scene';
 
 type Options = {
