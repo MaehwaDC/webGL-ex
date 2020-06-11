@@ -1,28 +1,23 @@
 import { createFinder } from '../../utils/testField';
 
-class List<T> {
-  constructor(
-    protected readonly list: T[] = [],
-  ) {}
+class List<T> extends Array<T> {
+  constructor(list?: T[]) {
+    super(list?.length || 0);
+    if (list) {
+      super.concat(list);
+    }
+  }
 
   public remove(item: T): void {
-    const currentEventIndex = this.list.findIndex(createFinder<T>(item));
-    this.list.splice(currentEventIndex, currentEventIndex);
+    const currentEventIndex = this.findIndex(createFinder<T>(item));
+    this.splice(currentEventIndex, currentEventIndex);
   }
 
   public get<U = unknown>(item: T, defaultVal?: U): T | U | undefined {
-    return this.list.find(createFinder<T>(item)) || defaultVal;
+    return this.find(createFinder<T>(item)) || defaultVal;
   }
 
-  public has = this.list.includes;
-
-  public push = this.list.push;
-
-  public pop = this.list.pop;
-
-  public shift = this.list.shift;
-
-  public unshift = this.list.unshift
+  public has = this.includes;
 }
 
 export default List;

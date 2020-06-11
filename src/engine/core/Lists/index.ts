@@ -1,2 +1,2 @@
-// eslint-disable-next-line import/prefer-default-export
 export { default as List } from './List';
+export { default as UniqList } from './UniqList';

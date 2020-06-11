@@ -1,13 +1,5 @@
-import { List } from '../Lists';
+import { UniqList } from '../Lists';
 
-class EventList extends List<string> {
-  push = (item: string): number => {
-    if (item && !this.has(item)) {
-      return this.push(item);
-    }
-
-    return -1;
-  }
-}
+class EventList extends UniqList<string> {}
 
 export default EventList;
