@@ -1,5 +1,6 @@
+import { Executable } from '../../core/Executor/types';
 
-abstract class GameObject {
+abstract class GameObject implements Executable {
   constructor(
     protected posX: number,
     protected posY: number,
